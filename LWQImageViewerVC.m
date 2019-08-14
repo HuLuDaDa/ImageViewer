@@ -68,6 +68,7 @@
     [self.view addGestureRecognizer:tap];
 
     _mainScrollView.contentOffset = CGPointMake(SWight*ind, 0);
+    _pageController.currentPage = ind;
 }
 - (void)tapClick:(UITapGestureRecognizer *)tap{
     [self dismissViewControllerAnimated:NO completion:nil];
