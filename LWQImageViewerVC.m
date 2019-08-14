@@ -14,9 +14,10 @@
 @end
 
 @implementation LWQImageViewerVC
-- (instancetype)initWithImageArray:(NSMutableArray *)imageArray{
+- (instancetype)initWithImageArray:(NSMutableArray *)imageArray andPageIndex:(int)index{
     if ([super init]) {
         self.imageArray = imageArray;
+        ind = index;
     }
     return self;
 }
@@ -65,6 +66,8 @@
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick:)];
     [self.view addGestureRecognizer:tap];
+
+    _mainScrollView.contentOffset = CGPointMake(SWight*ind, 0);
 }
 - (void)tapClick:(UITapGestureRecognizer *)tap{
     [self dismissViewControllerAnimated:NO completion:nil];
@@ -81,7 +84,8 @@
         UIAlertAction *confirm = [UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
             NSLog(@"确认保存图片");
             // 保存图片到相册
-            [self imageSavedToPhotosAlbum:imageView.image didFinishSavingWithError:@"保存失败" contextInfo:nil];
+            NSError *error = [[NSError alloc]init];
+            [self imageSavedToPhotosAlbum:imageView.image didFinishSavingWithError:error contextInfo:nil];
         }];
         [alertControl addAction:cancel];
         [alertControl addAction:confirm];
@@ -135,13 +139,13 @@
 }
 
 /*
-#pragma mark - Navigation
+ #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

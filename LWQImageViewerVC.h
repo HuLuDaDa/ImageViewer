@@ -10,10 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LWQImageViewerVC : UIViewController
+@interface LWQImageViewerVC : UIViewController{
+    int ind;
+}
 //图片浏览器
 @property (nonatomic, strong) NSMutableArray *imageArray;
-- (instancetype)initWithImageArray:(NSMutableArray *)imageArray;
+- (instancetype)initWithImageArray:(NSMutableArray *)imageArray andPageIndex:(int)index;
 @end
 
 NS_ASSUME_NONNULL_END
